@@ -34,7 +34,7 @@ function agendar() {
         window.location.href = "/componentes/Consultas/consultas.html";
       } else if (response.status === 401) {
         // O servidor retornou um status 401 (Não Autorizado), o que indica falha na autenticação.
-        console.log("Dados de login incorretos. Tente novamente.");
+        console.log("Dados incorretos. Tente novamente.");
       } else {
         // Lida com outros códigos de status, se necessário.
         console.log("Erro no servidor. Tente novamente mais tarde.");
