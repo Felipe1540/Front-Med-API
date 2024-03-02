@@ -110,6 +110,43 @@
     </div>
   </section>
 
+  <!-- Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="modalConsulta" tabindex="-1" aria-labelledby="modalConsultaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalConsultaLabel">Editar Consulta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="consultaForm">
+            <div class="mb-3">
+              <label for="medico" class="form-label">Médico</label>
+              <input type="text" class="form-control" id="medico" name="medico">
+            </div>
+            <div class="mb-3">
+              <label for="paciente" class="form-label">Paciente</label>
+              <input type="text" class="form-control" id="paciente" name="paciente">
+            </div>
+            <div class="mb-3">
+              <label for="data" class="form-label">Data</label>
+              <input type="datetime-local" class="form-control" id="data" name="data">
+            </div>
+            <!-- Adicione outros campos conforme necessário para editar outras informações da consulta -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" id="salvarConsulta">Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JavaScript -->
+  <script src="./dadosConsulta.js"></script>
 </body>
 
 </html>

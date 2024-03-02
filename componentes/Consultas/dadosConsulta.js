@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <td>${item.nomeMedico}</td>
                       <td>${item.nomePaciente}</td>
                       <td>${formattedDate}</td>
+                      <td><button class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal" data-bs-target="#modalConsulta${item.id}">Editar</button></td>
                     </tr>`;
         tbody.insertAdjacentHTML("beforeend", row);
 
