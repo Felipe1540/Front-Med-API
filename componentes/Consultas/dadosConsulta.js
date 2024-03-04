@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Carregar os dados da API e preencher a tabela
   fetch("http://localhost:8080/consulta")
     .then((response) => {
       if (!response.ok) {
@@ -16,6 +17,39 @@ document.addEventListener("DOMContentLoaded", function () {
       const tbody = document.querySelector("table tbody");
       tbody.innerHTML = "";
 
+      // Função para preencher o modal com os valores da linha correspondente
+      function preencherModal(event) {
+        const button = event.target;
+        const row = button.closest("tr");
+
+        const nomeMedico = row.querySelectorAll("td")[0].innerText;
+        const nomePaciente = row.querySelectorAll("td")[1].innerText;
+
+        const modal = document.getElementById("modalEditar");
+        const pacienteSelect = modal.querySelector("#pacientesSelect");
+        const medicoSelect = modal.querySelector("#medicoSelect");
+
+        // Limpar os selects antes de adicionar novas opções
+        pacienteSelect.innerHTML = "";
+        medicoSelect.innerHTML = "";
+
+        // Criar e adicionar uma nova opção para o médico
+        const optionMedico = document.createElement("option");
+        optionMedico.text = nomeMedico;
+        medicoSelect.appendChild(optionMedico);
+
+        // Criar e adicionar uma nova opção para o paciente
+        const optionPaciente = document.createElement("option");
+        optionPaciente.text = nomePaciente;
+        pacienteSelect.appendChild(optionPaciente);
+
+        console.log(pacienteSelect, medicoSelect);
+
+        // Abrir o modal
+        var myModal = new bootstrap.Modal(modal);
+        myModal.show();
+      }
+
       // Preenche a tabela com os dados da API
       data.forEach((item) => {
         // Formata a data
@@ -32,11 +66,15 @@ document.addEventListener("DOMContentLoaded", function () {
                       <td>${item.nomeMedico}</td>
                       <td>${item.nomePaciente}</td>
                       <td>${formattedDate}</td>
-                      <td><button class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal" data-bs-target="#modalConsulta${item.id}">Editar</button></td>
+                      <td><button type="button" class="btn btn-primary btn-editar">Editar</button></td>                      
                     </tr>`;
         tbody.insertAdjacentHTML("beforeend", row);
+      });
 
-        console.log(row);
+      // Adicionar evento de clique aos botões "Editar" para preencher o modal
+      const buttonsEditar = document.querySelectorAll(".btn-editar");
+      buttonsEditar.forEach(function (button) {
+        button.addEventListener("click", preencherModal);
       });
     })
     .catch((error) => console.error(error));
