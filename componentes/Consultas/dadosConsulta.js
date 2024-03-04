@@ -24,10 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const nomeMedico = row.querySelectorAll("td")[0].innerText;
         const nomePaciente = row.querySelectorAll("td")[1].innerText;
+        const horario = row.querySelectorAll("td")[2].innerText;
 
         const modal = document.getElementById("modalEditar");
         const pacienteSelect = modal.querySelector("#pacientesSelect");
         const medicoSelect = modal.querySelector("#medicoSelect");
+        const especialidadeSelect = modal.querySelector("#especialidadeSelect");
+        const dataInput = modal.querySelector("#dataInput"); // Selecione o campo de data
 
         // Limpar os selects antes de adicionar novas opções
         pacienteSelect.innerHTML = "";
@@ -43,7 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
         optionPaciente.text = nomePaciente;
         pacienteSelect.appendChild(optionPaciente);
 
-        console.log(pacienteSelect, medicoSelect);
+        // Converter e formatar a data no formato desejado
+        const [day, month, year, hour, minute] = horario
+          .replace(",", "")
+          .split(/[ /:]/);
+        const formattedDateTime = `${year}-${month}-${day}T${hour}:${minute}`;
+
+        dataInput.value = formattedDateTime;
+
+        console.log(pacienteSelect, medicoSelect, formattedDateTime);
 
         // Abrir o modal
         var myModal = new bootstrap.Modal(modal);
