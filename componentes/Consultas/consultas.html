@@ -40,7 +40,7 @@
               <a class="nav-link" href="../Consultas/consultas.html">Consultar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../CadastroMedicos/cadastroMedico.html">Cadastrar médico</a>
+              <a class="nav-link" href="../CadastroMedicos/cadastroMedico.html">Cadastrar Médico</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../CadastroDePacientes/cadastroPacientes.html">Cadastrar Paciente</a>
@@ -73,16 +73,38 @@
                   <th scope="col">Médico</th>
                   <th scope="col">Paciente</th>
                   <th scope="col">Data</th>
+                  <th scope="col">Editar</th>
                 </tr>
               </thead>
               <tbody>
                 <!-- As linhas serão preenchidas dinamicamente aqui -->
               </tbody>
             </table>
+
+            <!-- Pagination -->
+            <nav>
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Voltar">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+
+                <li class="page-item"><a class="page-link" href="#"></a></li>
+
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Avançar">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
           </form>
         </div>
       </div>
     </div>
+
     <div
       class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
       <!-- Copyright -->
@@ -111,42 +133,39 @@
   </section>
 
   <!-- Modal -->
-  <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  <div class="modal fade" id="modalEditar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Consulta</h1>
+          <h1 class="modal-title fs-5" id="modalLabel">Editar Consulta</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
 
           <div class="form-outline mb-3">
             <label class="form-label">Paciente:</label>
-            <select id="pacientesSelect" name="pacientesSelect" class="form-select form-select-lg paciente"
-              aria-label="Large select example">
+            <select id="pacientesSelect" name="pacientesSelect" class="form-select form-select-lg paciente">
               <option id="pacientesSelect" selected disabled>Selecione o paciente</option>
             </select>
           </div>
 
           <div class="form-outline mb-3">
             <label class="form-label">Médico:</label>
-            <select id="medicoSelect" name="medicoSelect" class="form-select form-select-lg medico"
-              aria-label="Large select example">
+            <select id="medicoSelect" name="medicoSelect" class="form-select form-select-lg medico">
               <option id="medicoSelect" selected disabled>Selecione o médico</option>
             </select>
           </div>
 
-          <div class="form-outline mb-3">
+          <!-- <div class="form-outline mb-3">
             <label class="form-label">Especialidade:</label>
-            <select class="form-select form-select-lg especialidade" aria-label="Large select example"
-              id="especialidadeSelect">
+            <select class="form-select form-select-lg especialidade" id="especialidadeSelect">
               <option selected disabled>Selecione a especialidade</option>
               <option value="ORTOPEDIA">ORTOPEDIA</option>
               <option value="CARDIOLOGIA">CARDIOLOGIA</option>
               <option value="GINECOLOGIA">GINECOLOGIA</option>
               <option value="DERMATOLOGIA">DERMATOLOGIA</option>
             </select>
-          </div>
+          </div> -->
 
           <div class="form-outline mb-3">
             <label class="form-label">Horário:</label>
