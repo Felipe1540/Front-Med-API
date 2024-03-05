@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const itensPorPagina = 5; // Defina a quantidade de itens por página
   let paginaAtual = 0; // Página inicial
+  let idConsulta;
 
   function carregarDadosPaginados(pagina) {
     const url = `http://localhost:8080/consulta?page=${pagina}&size=${itensPorPagina}`;
@@ -25,6 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
           const nomeMedico = row.querySelectorAll("td")[0].innerText;
           const nomePaciente = row.querySelectorAll("td")[1].innerText;
           const horario = row.querySelectorAll("td")[2].innerText;
+
+          // Definir o ID da consulta
+          idConsulta = row.querySelector("th").innerText;
 
           const modal = document.getElementById("modalEditar");
           const pacienteSelect = modal.querySelector("#pacientesSelect");
@@ -156,4 +160,47 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   carregarDadosPaginados(paginaAtual);
+
+  function salvarAlteracoes() {
+    const modal = document.getElementById("modalEditar");
+    const dataInput = modal.querySelector("#dataInput");
+
+    const updateData = {
+      id: idConsulta,
+      data: dataInput.value,
+    };
+
+    //SALVAR ALTERACOES
+    console.log(updateData);
+
+    fetch("http://localhost:8080/consulta", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify(updateData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          window.location.href = "/componentes/Consultas/consultas.html";
+        } else if (response.status === 401) {
+          // O servidor retornou um status 401 (Não Autorizado), o que indica falha na autenticação.
+          console.log("Dados incorretos. Tente novamente.");
+        } else {
+          // Lida com outros códigos de status, se necessário.
+          console.log("Erro no servidor. Tente novamente mais tarde.");
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na solicitação: " + error);
+      });
+
+    console.log(updateData);
+  }
+
+  const buttonsSalvar = document.querySelectorAll(".btn-alterar");
+  buttonsSalvar.forEach(function (button) {
+    button.addEventListener("click", salvarAlteracoes);
+  });
 });
