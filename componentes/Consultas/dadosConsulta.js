@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const itensPorPagina = 5; // Defina a quantidade de itens por página
   let paginaAtual = 0; // Página inicial
   let idConsulta;
+  let alertShown = false;
 
   function carregarDadosPaginados(pagina) {
     const url = `http://localhost:8080/consulta?page=${pagina}&size=${itensPorPagina}`;
@@ -170,6 +171,8 @@ document.addEventListener("DOMContentLoaded", function () {
       data: dataInput.value,
     };
 
+    if (alertShown) return;
+
     //SALVAR ALTERACOES
     console.log(updateData);
 
@@ -183,10 +186,11 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => {
         if (response.ok) {
+          // Exibir o alerta de sucesso
           window.location.href = "/componentes/Consultas/consultas.html";
-        } else if (response.status === 401) {
-          // O servidor retornou um status 401 (Não Autorizado), o que indica falha na autenticação.
-          console.log("Dados incorretos. Tente novamente.");
+          setTimeout(() => {
+            appendAlert("Alterações salvas com sucesso!", "success");
+          }, 5000);
         } else {
           // Lida com outros códigos de status, se necessário.
           console.log("Erro no servidor. Tente novamente mais tarde.");
@@ -203,4 +207,17 @@ document.addEventListener("DOMContentLoaded", function () {
   buttonsSalvar.forEach(function (button) {
     button.addEventListener("click", salvarAlteracoes);
   });
+
+  const alertPlaceholder = document.getElementById("alertaResponses");
+  const appendAlert = (message, type) => {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+      `   <div>${message}</div>`,
+      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+      "</div>",
+    ].join("");
+
+    alertPlaceholder.append(wrapper);
+  };
 });
